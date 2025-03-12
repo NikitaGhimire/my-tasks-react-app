@@ -1,6 +1,7 @@
 import React from 'react';
 import ClassInput from './components/TaskInput';
 import './styles/App.css'
+import Footer from './components/Footer';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <main>
         <ClassInput name="My Todo List" />
       </main>
+      < Footer />
     </div>
   );
 }
