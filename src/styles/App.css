@@ -1,115 +1,470 @@
-/* Reset some default styles */
+/* Reset and base styles */
+:root {
+    --primary-color: #3a86ff;
+    --primary-light: #8bb8ff;
+    --danger-color: #ff6b6b;
+    --success-color: #4dd783;
+    --text-primary: #2d3748;
+    --text-secondary: #718096;
+    --bg-light: #f8fafc;
+    --bg-white: #ffffff;
+    --bg-gradient: linear-gradient(135deg, #3a86ff, #8bb8ff);
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --border-radius: 16px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #f9f9f9;
-    color: #333;
+    color: var(--text-primary);
+    line-height: 1.6;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .App {
-    width: 100%;
-    max-width: 600px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .App-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .App-header h1 {
-    font-size: 2em;
-    color: #333;
-  }
-  
-  section {
-    margin-top: 20px;
-  }
-  
-  form {
+}
+
+/* Reset the root layout */
+.App {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-  
-  label {
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    padding: 2rem;
+    background: var(--bg-light);
+    max-width: 100%;
+}
+
+.App-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.App-header h1 {
+    font-size: 2em;
+    color: #333;
+}
+
+section {
+    margin-top: 20px;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+label {
     font-size: 1.2em;
     color: #333;
-  }
-  
-  input[type="text"] {
+}
+
+input[type="text"] {
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
-  
-  button {
+}
+
+button {
     padding: 10px;
     font-size: 1em;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  button[type="submit"] {
+}
+
+button[type="submit"] {
     background-color: #28a745;
     color: white;
-  }
-  
-  button[type="delete"] {
+}
+
+button[type="delete"] {
     background-color: #dc3545;
     color: white;
-  }
-  
-  ul {
+}
+
+ul {
     list-style: none;
     padding: 0;
-  }
-  
-  li {
+}
+
+li {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #eee;
-  }
-  
-  li button {
+}
+
+li button {
     margin-left: 10px;
-  }
-  
-  li button:first-of-type {
+}
+
+li button:first-of-type {
     background-color: #007bff;
     color: white;
-  }
-  
-  li button:last-of-type {
+}
+
+li button:last-of-type {
     background-color: #dc3545;
     color: white;
-  }
-  
-  h4 {
+}
+
+h4 {
     margin-top: 20px;
     font-size: 1.5em;
     color: #333;
-  }
-  
-  p {
+}
+
+p {
     font-size: 1em;
     color: #333;
-  }
-  
+}
+
+/* Adjust main container */
+.main-container {
+    display: grid;
+    grid-template-columns: minmax(250px, 1fr) minmax(300px, 1.2fr) minmax(250px, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 1800px;
+    margin: 0 auto;
+    height: auto;
+    min-height: min-content;
+    max-height: calc(100vh - 4rem); /* Prevent overflow */
+    border-radius: var(--border-radius);
+}
+
+/* Task sections styling */
+.app-info,
+.task-input-section,
+.task-list-container {
+    background: var(--bg-white);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    height: 100%;
+    max-height: 100%; /* Ensure sections don't exceed container height */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.app-info:hover,
+.task-input-section:hover,
+.task-list-container:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.task-input-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 0;
+}
+
+.task-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    background: var(--bg-white);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Input styling */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+input[type="text"],
+input[type="date"] {
+    padding: 0.8rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--bg-light);
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
+    background: var(--bg-white);
+}
+
+/* Task item styling */
+.task-item {
+    background: var(--bg-white);
+    border-radius: 8px;
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--primary-color);
+}
+
+.task-item.completed {
+    border-left-color: var(--success-color);
+    background: var(--bg-light);
+}
+
+.task-item.overdue {
+    border-left-color: var(--danger-color);
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.task-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.due-date {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    background: var(--bg-light);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+/* Filter buttons */
+.task-filters {
+    display: flex;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-md);
+}
+
+.filter-btn {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 25px;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    min-width: 100px;
+    font-weight: 500;
+}
+
+.filter-btn:hover {
+    background: var(--primary-light);
+    color: var(--bg-white);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--bg-gradient);
+    color: white;
+    box-shadow: 0 4px 6px rgba(58, 134, 255, 0.2);
+}
+
+/* Task completion styles */
+.task-item.completed .task-text {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: var(--spacing-md);
+    font-style: italic;
+}
+
+/* Animations */
+@keyframes taskAdded {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.task-item {
+    animation: taskAdded 0.4s ease-out;
+}
+
+.task-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Task action buttons */
+.btn-edit,
+.btn-delete {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+}
+
+.btn-edit {
+    background: var(--bg-gradient);
+    color: white;
+}
+
+.btn-delete {
+    background: linear-gradient(135deg, #ff6b6b, #ff8787);
+    color: white;
+}
+
+.btn-edit:hover,
+.btn-delete:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Task item hover state */
+.task-item:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow);
+}
+
+/* Mobile optimizations */
+@media (max-width: 1024px) {
+    .main-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .app-info {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .App {
+        padding: 1rem;
+        justify-content: flex-start; /* Better for mobile scrolling */
+    }
+
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        margin: 0;
+        max-height: none; /* Allow full scrolling on mobile */
+    }
+
+    .task-input-section,
+    .task-list-container {
+        border-radius: 0;
+        padding: 1rem;
+        max-height: none;
+    }
+
+    /* Adjust typography for mobile */
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.25rem; }
+    h3 { font-size: 1.125rem; }
+    h4 { font-size: 1rem; }
+
+    /* Make buttons more touch-friendly */
+    .btn-edit,
+    .btn-delete {
+        width: 44px;
+        height: 44px;
+        border-radius: 8px;
+    }
+
+    .filter-btn {
+        padding: 0.75rem 1rem;
+        min-width: 80px;
+    }
+
+    /* Adjust task items for touch */
+    .task-item {
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Improve form elements for mobile */
+    input[type="text"],
+    input[type="date"] {
+        padding: 0.75rem;
+        font-size: 16px; /* Prevents iOS zoom */
+    }
+
+    /* Stack task actions vertically on very small screens */
+    @media (max-width: 350px) {
+        .task-actions {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+}
+
+/* Handle landscape orientation */
+@media (max-height: 500px) and (orientation: landscape) {
+    .App {
+        padding: 0.25rem;
+    }
+
+    .main-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+
+    .task-input-section,
+    .task-list-container {
+        max-height: calc(100vh - 1rem);
+    }
+}
+
