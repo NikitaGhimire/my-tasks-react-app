@@ -228,6 +228,23 @@ input[type="date"]:focus {
     background: var(--bg-white);
 }
 
+/* Priority select styling */
+.priority-select {
+    padding: 0.8rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    background: var(--bg-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.priority-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.1);
+    background: var(--bg-white);
+}
+
 /* Task item styling */
 .task-item {
     background: var(--bg-white);
@@ -245,6 +262,18 @@ input[type="date"]:focus {
 
 .task-item.overdue {
     border-left-color: var(--danger-color);
+}
+
+.task-item[data-priority="high"] {
+    border-left: 4px solid #dc3545;
+}
+
+.task-item[data-priority="normal"] {
+    border-left: 4px solid #3a86ff;
+}
+
+.task-item[data-priority="low"] {
+    border-left: 4px solid #4dd783;
 }
 
 .task-content {
@@ -266,6 +295,29 @@ input[type="date"]:focus {
     padding: 0.3rem 0.8rem;
     border-radius: 15px;
     display: inline-block;
+}
+
+.task-priority {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.task-priority.high {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+.task-priority.normal {
+    background: rgba(58, 134, 255, 0.1);
+    color: #3a86ff;
+}
+
+.task-priority.low {
+    background: rgba(77, 215, 131, 0.1);
+    color: #4dd783;
 }
 
 /* Filter buttons */

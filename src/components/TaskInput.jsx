@@ -10,6 +10,7 @@ class ClassInput extends Component {
         this.state = {
         inputVal: "",
         dueDate: "",
+        priority: "normal", // Add priority state
         editIndex: null,
         editVal: '',
         };
@@ -17,6 +18,7 @@ class ClassInput extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleDateChange = this.handleDateChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handlePriorityChange = this.handlePriorityChange.bind(this);
     }
 
     handleInputChange(e) {
@@ -31,19 +33,28 @@ class ClassInput extends Component {
         });
     }
 
+    // Add priority handler
+    handlePriorityChange(e) {
+        this.setState({
+            priority: e.target.value
+        });
+    }
+
     handleSubmit(e){
         e.preventDefault();
         if (this.state.inputVal.trim()) {
             const task = {
                 text: this.state.inputVal,
                 dueDate: this.state.dueDate,
+                priority: this.state.priority,
                 completed: false,
                 id: Date.now()
             };
             this.props.onAddTodo(task);
             this.setState({
                 inputVal: "",
-                dueDate: ""
+                dueDate: "",
+                priority: "normal"
             });
         }
     }
@@ -74,6 +85,19 @@ render() {
                         min={new Date().toISOString().split('T')[0]}
                         required
                     />
+                </div>
+                <div className="input-group">
+                    <label htmlFor="priority">Priority:</label>
+                    <select
+                        id="priority"
+                        value={this.state.priority}
+                        onChange={this.handlePriorityChange}
+                        className="priority-select"
+                    >
+                        <option value="low">Low</option>
+                        <option value="normal">Normal</option>
+                        <option value="high">High</option>
+                    </select>
                 </div>
                 <button type="submit" className="btn-primary">Add Task</button>
             </form>

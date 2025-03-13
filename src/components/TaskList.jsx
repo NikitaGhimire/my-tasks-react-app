@@ -42,7 +42,8 @@ const TaskList = ({ todos, onEdit, onDelete, onToggleComplete }) => {
             <ul className="task-list">
                 {filteredTodos.map((task) => (
                     <li key={task.id} 
-                        className={`task-item ${task.completed ? 'completed' : ''}`}>
+                        className={`task-item ${task.completed ? 'completed' : ''}`}
+                        data-priority={task.priority}>
                         <div className="task-content">
                             <input
                                 type="checkbox"
@@ -51,11 +52,16 @@ const TaskList = ({ todos, onEdit, onDelete, onToggleComplete }) => {
                             />
                             <div className="task-details">
                                 <span className="task-text">{task.text}</span>
-                                {task.dueDate && (
-                                    <span className="due-date">
-                                        Due: {formatDate(task.dueDate)}
+                                <div className="task-meta">
+                                    {task.dueDate && (
+                                        <span className="due-date">
+                                            Due: {formatDate(task.dueDate)}
+                                        </span>
+                                    )}
+                                    <span className={`task-priority ${task.priority}`}>
+                                        {task.priority}
                                     </span>
-                                )}
+                                </div>
                             </div>
                         </div>
                         <div className="task-actions">
