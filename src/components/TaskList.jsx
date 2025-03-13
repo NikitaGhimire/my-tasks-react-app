@@ -3,7 +3,7 @@ import Count from './Count';
 import EditTaskForm from './EditTaskForm';
 import '../styles/App.css';
 
-const TaskList = ({ todos, onEdit, onDelete, onToggleComplete }) => {
+const TaskList = ({ todos, onEdit, onDelete, onToggleComplete, onClearAll }) => {
     const [filter, setFilter] = useState('all');
     const [editingTask, setEditingTask] = useState(null);
 
@@ -28,7 +28,18 @@ const TaskList = ({ todos, onEdit, onDelete, onToggleComplete }) => {
 
     return (
         <div className={`task-list-container ${editingTask ? 'editing' : ''}`} style={{ position: 'relative' }}>
-            <h4>All Tasks</h4>
+            <div className="task-header">
+                <h4>All Tasks</h4>
+                {todos.length > 0 && (
+                    <button 
+                        onClick={onClearAll}
+                        className="btn-clear"
+                        title="Clear all tasks"
+                    >
+                        Clear All
+                    </button>
+                )}
+            </div>
             <Count count={todos.length} />
             <div className="task-filters">
                 <button 
