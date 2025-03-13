@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Count from './Count';
+import EditTaskForm from './EditTaskForm';
 import '../styles/App.css';
 
 const TaskList = ({ todos, onEdit, onDelete, onToggleComplete }) => {
     const [filter, setFilter] = useState('all');
+    const [editingTask, setEditingTask] = useState(null);
 
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString();
@@ -15,8 +17,17 @@ const TaskList = ({ todos, onEdit, onDelete, onToggleComplete }) => {
         return true;
     });
 
+    const handleEditClick = (task) => {
+        setEditingTask(task);
+    };
+
+    const handleSaveEdit = (updatedTask) => {
+        onEdit(updatedTask.id, updatedTask);
+        setEditingTask(null);
+    };
+
     return (
-        <div className="task-list-container">
+        <div className={`task-list-container ${editingTask ? 'editing' : ''}`} style={{ position: 'relative' }}>
             <h4>All Tasks</h4>
             <Count count={todos.length} />
             <div className="task-filters">
@@ -66,7 +77,7 @@ const TaskList = ({ todos, onEdit, onDelete, onToggleComplete }) => {
                         </div>
                         <div className="task-actions">
                             <button 
-                                onClick={() => onEdit(task.id)} 
+                                onClick={() => handleEditClick(task)} 
                                 className="btn-edit"
                                 title="Edit task"
                             >
@@ -86,6 +97,13 @@ const TaskList = ({ todos, onEdit, onDelete, onToggleComplete }) => {
                     <p className="empty-message">No tasks found</p>
                 )}
             </ul>
+            {editingTask && (
+                <EditTaskForm
+                    task={editingTask}
+                    onSave={handleSaveEdit}
+                    onCancel={() => setEditingTask(null)}
+                />
+            )}
         </div>
     );
 };

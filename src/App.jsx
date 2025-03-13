@@ -8,17 +8,12 @@ import './styles/App.css';
 function App() {
     const [todos, setTodos] = useState([]);
 
-    const handleEdit = (taskId) => {
-        const taskToEdit = todos.find(task => task.id === taskId);
-        if (taskToEdit) {
-            // Update the task
-            const updatedTasks = todos.map(task => 
-                task.id === taskId 
-                    ? { ...task, text: prompt('Edit task:', task.text) || task.text }
-                    : task
-            );
-            setTodos(updatedTasks);
-        }
+    const handleEdit = (taskId, updatedTask) => {
+        // Remove the prompt/alert and directly update the task
+        const updatedTasks = todos.map(task => 
+            task.id === taskId ? updatedTask : task
+        );
+        setTodos(updatedTasks);
     };
 
     const handleDelete = (taskId) => {

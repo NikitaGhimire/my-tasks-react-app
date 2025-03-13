@@ -520,3 +520,97 @@ input[type="date"]:focus {
     }
 }
 
+/* Edit task form styling */
+.edit-task-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.edit-task-form {
+    background: var(--bg-white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    width: 95%;
+    max-width: 100%;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.2s ease-out;
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-end;
+    margin-top: var(--spacing-md);
+}
+
+.btn-save {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-cancel {
+    background: var(--bg-light);
+    color: var(--text-primary);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-save:hover,
+.btn-cancel:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Mobile styles for edit form */
+@media (max-width: 768px) {
+    .edit-task-overlay {
+        position: fixed; /* Change to fixed for mobile */
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+
+    .edit-task-form {
+        width: 90%;
+        max-width: 500px;
+        padding: var(--spacing-lg);
+    }
+}
+
+/* Remove hover effects while edit form is open */
+.task-list-container.editing {
+    transform: none;
+    box-shadow: var(--shadow);
+}
+
+.task-list-container.editing .task-item:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.task-list-container.editing .btn-edit:hover,
+.task-list-container.editing .btn-delete:hover {
+    transform: none;
+    box-shadow: none;
+}
+
